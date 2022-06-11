@@ -14,8 +14,8 @@
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add a feed source
-#echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
-#echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
+echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
+echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 #echo 'src-git adguardhome https://github.com/kenzok8/openwrt-packages/tree/master/luci-app-adguardhome' >>feeds.conf.default
 #echo 'src-git aliyundrive-webdav https://github.com/kenzok8/openwrt-packages/tree/master/aliyundrive-webdav' >>feeds.conf.defaul
 #echo 'src-git ddnsto https://github.com/kenzok8/openwrt-packages/tree/master/ddnsto' >>feeds.conf.defaul
