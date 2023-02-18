@@ -18,7 +18,7 @@ env:
   DIY_P2_SH: diy-part2.sh
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
-  KERNEL_VERSION: 6.1.10
+  KERNEL_VERSION: 5.15.94
 
 jobs:
   build_openwrt:
