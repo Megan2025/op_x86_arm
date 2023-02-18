@@ -1,4 +1,4 @@
-name: Cloud N1 OpenWrt
+name: ARM_N1_OpenWrt
 
 on:
   push:
