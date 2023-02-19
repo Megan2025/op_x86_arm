@@ -32,8 +32,6 @@ env:
   UPLOAD_WETRANSFER: false
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
-  FILE_NAME: ARMv8_ROOTFS
-  PRODUCT_NAME: ARMv8_ROOTFS
 
 jobs:
   build:
@@ -165,6 +163,13 @@ jobs:
         [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "::set-output name=status::success"
+        
+    - name: 打包内核
+      uses: unifreq/openwrt_packit@master
+      env:
+      OPENWRT_ARMVIRT: openwrt/bin/targets/*/*/*.tar.gz
+      PACKAGE_SOC: s905d
+      KERNEL_VERSION_NAME: 5.13.2_5.4.132
 
     - name: Upload firmware to release
       uses: softprops/action-gh-release@v1
