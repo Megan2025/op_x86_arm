@@ -164,13 +164,6 @@ jobs:
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "::set-output name=status::success"
         
-    - name: 打包内核
-      uses: unifreq/openwrt_packit@master
-      env:
-      WHOAMI: Megan2025
-      OPENWRT_ARMVIRT: openwrt/bin/targets/*/*/*.tar.gz
-      PACKAGE_SOC: s905d
-      KERNEL_VERSION_NAME: 5.13.2_5.4.132
 
     - name: Upload firmware to release
       uses: softprops/action-gh-release@v1
