@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build_X86_docker
+name: Build_X86_docker_OP
 
 on:
   repository_dispatch:
