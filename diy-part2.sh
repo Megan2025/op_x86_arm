@@ -16,3 +16,4 @@
 # 解决 vsftpd 与 vsftpd-alt 文件冲突
 sed -i 's/CONFIG_PACKAGE_vsftpd-alt=y/# CONFIG_PACKAGE_vsftpd-alt is not set/g' .config
 echo "CONFIG_PACKAGE_vsftpd=y" >> .config
+sed -i 's/CONFIG_PACKAGE_luci-theme-ifit=y/# CONFIG_PACKAGE_luci-theme-ifit is not set/g' .config
