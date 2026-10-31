@@ -165,10 +165,16 @@ jobs:
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
-        files: ${{ env.FIRMWARE }}/*
+        files: |
+          ${{ env.FIRMWARE }}/*.img.gz
+          ${{ env.FIRMWARE }}/*.iso
+          ${{ env.FIRMWARE }}/*.vmdk
+          ${{ env.FIRMWARE }}/*.tar.gz
+          ${{ env.FIRMWARE }}/*.*.gz
 
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
+      continue-on-error: true
       with:
         retain_days: 1
         keep_minimum_runs: 3
@@ -176,6 +182,7 @@ jobs:
 
     - name: Remove old Releases
       uses: dev-drprasad/delete-older-releases@v0.3.3
+      continue-on-error: true
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
         keep_latest: 3
