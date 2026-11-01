@@ -21,3 +21,20 @@ echo "uci commit luci" >> package/lean/default-settings/files/zzz-default-settin
 
 # 4. 关闭引起下载超时的独立 xray-core
 sed -i 's/CONFIG_PACKAGE_xray-core=y/# CONFIG_PACKAGE_xray-core is not set/g' .config
+
+# 5. 剔除不需要的插件及其后端核心
+for pkg in \
+  luci-app-uugamebooster \
+  luci-app-xlnetacc \
+  luci-app-aliyundrive-webdav \
+  luci-i18n-aliyundrive-webdav-zh-cn \
+  aliyundrive-webdav \
+  luci-app-adbyby-plus \
+  luci-i18n-adbyby-plus-zh-cn \
+  adbyby \
+  luci-app-unblockmusic \
+  luci-i18n-unblockmusic-zh-cn \
+  UnblockNeteaseMusic-Go
+do
+  sed -i "s/CONFIG_PACKAGE_${pkg}=y/# CONFIG_PACKAGE_${pkg} is not set/g" .config
+done
