@@ -23,14 +23,5 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/modules/luci-base/
 echo "uci set luci.main.mediaurlbase='/luci-static/argon'" >> package/lean/default-settings/files/zzz-default-settings
 echo "uci commit luci" >> package/lean/default-settings/files/zzz-default-settings
 
-# 4. 修复 xray-core 下载源，直接指向 GitHub 官方源并支持重定向
-find feeds/ -name Makefile -path "*/xray-core/*" | while read -r file; do
-    sed -i 's|https://mirror2.openwrt.org/sources|https://github.com/XTLS/Xray-core/archive/refs/tags|g' "$file"
-    sed -i 's|v\$(PKG_VERSION).tar.gz|v\$(PKG_VERSION).tar.gz?|g' "$file"
-done
-
-# 5. 提前下载 xray-core 并校验文件大小大于 1MB，确保不被清理脚本误删
-mkdir -p dl
-if [ ! -s "dl/xray-core-26.10.29.tar.gz" ] || [ $(wc -c < "dl/xray-core-26.10.29.tar.gz") -lt 1048576 ]; then
-    curl -fL --retry 5 -o dl/xray-core-26.10.29.tar.gz "https://github.com/XTLS/Xray-core/archive/refs/tags/v26.10.29.tar.gz"
-fi
+# 4. 关闭引起 404/超时的外层独立 xray-core，避免中断编译
+sed -i 's/CONFIG_PACKAGE_xray-core=y/# CONFIG_PACKAGE_xray-core is not set/g' .config
